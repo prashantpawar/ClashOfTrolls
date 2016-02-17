@@ -15,8 +15,12 @@ contract ClashOfTrolls is usingOraclize {
         totalFunds += msg.value;
     }
     
-    function getRewardSize() returns (uint totalFunds) {
-        return totalFunds/10;
+    function getTotalFundsSize() returns (uint fundSize) {
+        fundSize = totalFunds;
+    }
+    
+    function getRewardSize() returns (uint rewardSize) {
+        rewardSize = totalFunds/10;
     }
 
     function claimReward(string post_id) returns (bool accepted) {
