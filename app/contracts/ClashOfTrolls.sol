@@ -15,7 +15,7 @@ contract ClashOfTrolls is usingOraclize {
         totalFunds += msg.value;
     }
 
-    function claimReward(string post_id) return (bool accepted) {
+    function claimReward(string post_id) returns (bool accepted) {
         uint trollID = numTrolls++;
         trolls[trollID] = Troll({
             addr: msg.sender,
