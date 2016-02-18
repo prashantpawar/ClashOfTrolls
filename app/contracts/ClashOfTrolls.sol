@@ -5,9 +5,9 @@ contract ClashOfTrolls is usingOraclize {
     uint totalFunds;
     
     struct Troll {
-        address addr;
-        string post_id;
-        uint reward;
+        address addr; //We want to know who the troll is
+        string post_id; //The post on Reddit where the troll attempt was made
+        uint reward; //The reward given to the troll
     }
 
     mapping (bytes32 => Troll) trolls;
@@ -17,6 +17,7 @@ contract ClashOfTrolls is usingOraclize {
         totalFunds += msg.value;
     }
 
+    //This callback is used by Oraclize to inform us of the response from Reddit API.
     function __callback(bytes32 id, string result) {
         if (msg.sender != oraclize_cbAddress()) throw;
         if (trolls[id].reward > 0) {
@@ -26,6 +27,8 @@ contract ClashOfTrolls is usingOraclize {
         }
     }
     
+    //The method trolls need to call in order to claim the reward.
+    //We give 10% of the current pool as the reward. This ensures that for a long time people will be able to claim rewards
     function claimReward(string post_id) returns (string url) {
         url = strConcat("json(http://www.reddit.com/by_id/t3_", post_id, ".json).data.children.0.data.score");
         bytes32 trollID = oraclize_query("URL", url);
@@ -35,4 +38,4 @@ contract ClashOfTrolls is usingOraclize {
             reward: 0
         });
     }
-}   
+}
