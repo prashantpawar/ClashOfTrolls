@@ -26,13 +26,13 @@ contract ClashOfTrolls is usingOraclize {
         }
     }
     
-
-    function claimReward(string post_id) returns (bytes32 trollID) {
-        trollID = oraclize_query("URL", "json(http://www.reddit.com/by_id/t3_469rig.json).data.children.0.data.score");
+    function claimReward(string post_id) returns (string url) {
+        url = strConcat("json(http://www.reddit.com/by_id/t3_", post_id, ".json).data.children.0.data.score");
+        bytes32 trollID = oraclize_query("URL", url);
         trolls[trollID] = Troll({
             addr: msg.sender,
             post_id: post_id,
             reward: 0
         });
     }
-}
+}   
