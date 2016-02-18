@@ -17,14 +17,6 @@ contract ClashOfTrolls is usingOraclize {
         totalFunds += msg.value;
     }
 
-    function getTotalFundsSize() returns (uint fundSize) {
-        fundSize = totalFunds;
-    }
-
-    function getRewardSize() returns (uint rewardSize) {
-        rewardSize = totalFunds/10;
-    }
-
     function __callback(bytes32 id, string result) {
         if (msg.sender != oraclize_cbAddress()) throw;
         if (trolls[id].reward > 0) {
