@@ -6,7 +6,8 @@ contract ClashOfTrolls is usingOraclize {
     
     struct Troll {
         address addr; //We want to know who the troll is
-        string post_id; //The post on Reddit where the troll attempt was made
+        string troll_post_id; //The post on Reddit where the troll attempt was made
+        string proof_comment_id; //The comment made the OP of the thread with proof
         uint reward; //The reward given to the troll
     }
 
@@ -29,13 +30,14 @@ contract ClashOfTrolls is usingOraclize {
     
     //The method trolls need to call in order to claim the reward.
     //We give 10% of the current pool as the reward. This ensures that for a long time people will be able to claim rewards
-    function claimReward(string post_id) returns (string url) {
-        url = strConcat("json(http://www.reddit.com/by_id/t3_", post_id, ".json).data.children.0.data.score");
+    function claimReward(string troll_post_id, string proof_comment_id) returns (string url) {
+        url = strConcat("json(http://www.reddit.com/by_id/t3_", troll_post_id, ".json).data.children.0.data.score");
         bytes32 trollID = oraclize_query("URL", url);
         trolls[trollID] = Troll({
             addr: msg.sender,
-            post_id: post_id,
+            troll_post_id: troll_post_id,
+            proof_comment_id: proof_comment_id,
             reward: 0
         });
     }
-}
+} 
