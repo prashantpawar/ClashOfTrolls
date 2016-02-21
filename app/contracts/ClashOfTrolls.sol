@@ -24,14 +24,20 @@ contract ClashOfTrolls is usingOraclize, mortal {
     //This callback is used by Oraclize to inform us of the response from Reddit API.
     function __callback(bytes32 id, string result) {
         if (msg.sender != oraclize_cbAddress()) throw;
+        Troll memory t;
         //Figure out which callback is it
+        //If post callback
         if (bytes(post_cb_index[id]).length == 0) { //Callback
-            Troll t = trolls[post_cb_index[id]];
+            t = trolls[post_cb_index[id]];
             string memory verification_url = strConcat("json(http://www.reddit.com/api/info.json?id=t1_", t.troll_post_id, ").data.children.0.data.body");
             bytes32 proof_cb_id = oraclize_query("URL", verification_url);
             proof_cb_index[proof_cb_id] = t.troll_post_id;
         }
-        //If post callback then verify Score above threshold
+        //If proof callback 
+        if (bytes(proof_cb_index[id]).length == 0) { //Callback
+            t = trolls[proof_cb_index[id]];
+            payReward(t);
+        }
         //If verification callback then payout if verification is successful
     }
 
