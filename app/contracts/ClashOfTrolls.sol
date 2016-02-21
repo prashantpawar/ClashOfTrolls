@@ -1,13 +1,14 @@
 import "dev.oraclize.it/api.sol";
+import "std";
 
-contract ClashOfTrolls is usingOraclize {
+contract ClashOfTrolls is usingOraclize, mortal {
     //Place where we store the total funds available for reward
     uint totalFunds;
 
     struct Troll {
         address addr; //We want to know who the troll is
         string troll_post_id; //The post on Reddit where the troll attempt was made
-        string proof_comment_id; //The comment made the OP of the thread with proof
+        string proof_comment_id; //The proof on Reddit where the troll attempt was made
         uint reward; //The reward given to the troll
     }
 
@@ -24,10 +25,11 @@ contract ClashOfTrolls is usingOraclize {
     function __callback(bytes32 id, string result) {
         if (msg.sender != oraclize_cbAddress()) throw;
         //Figure out which callback is it
-        if (post_cb_index[id]) { //Callback
+        if (bytes(post_cb_index[id]).length == 0) { //Callback
             Troll t = trolls[post_cb_index[id]];
-            string verification_url = strConcat("json(http://www.reddit.com/api/info.json?id=t1_", t.troll_post_id, ").data.children.0.data.body");
-            bytes32 post_cb_id = oraclize_query("URL", verification_url);
+            string memory verification_url = strConcat("json(http://www.reddit.com/api/info.json?id=t1_", t.troll_post_id, ").data.children.0.data.body");
+            bytes32 proof_cb_id = oraclize_query("URL", verification_url);
+            proof_cb_index[proof_cb_id] = t.troll_post_id;
         }
         //If post callback then verify Score above threshold
         //If verification callback then payout if verification is successful
