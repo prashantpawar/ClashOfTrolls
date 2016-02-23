@@ -1,26 +1,15 @@
 import "dev.oraclize.it/api.sol";
 import "std";
 
-contract abstract {
-    //This contract is a base class which describes a contract which is abstract
-    address implementation;
-    
-    function setImplementation(address addr) {
-        implementation = addr;
-    }
-}
-
-contract updatable {
-    //This contract is an abstract contract which enables the update functionality
-    address newContract;
-}
-
-
 contract Tugboat is usingOraclize, mortal {
     address cot;
     
     function Tugboat() {
         cot = new ClashOfTrolls();
+    }
+    
+    function updateContract(address addr) {
+        cot = addr;
     }
     
     function depositFunds() returns (bool result) {
@@ -45,4 +34,4 @@ contract Tugboat is usingOraclize, mortal {
     function claimReward(string troll_attempt, string proof) returns (bool result) {
         result = ClashOfTrolls(cot).claimReward(troll_attempt, proof);
     }
-}
+}      
