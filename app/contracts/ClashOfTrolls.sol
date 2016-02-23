@@ -17,8 +17,9 @@ contract ClashOfTrolls is usingOraclize, mortal {
     mapping (bytes32 => string) proof_cb_index;
 
     //This method is used by people to deposit funds for the reward
-    function depositFunds() {
+    function depositFunds() returns (bool result) {
         totalFunds += msg.value;
+        result = true;
     }
 
     //This callback is used by Oraclize to inform us of the response from Reddit API.
@@ -51,8 +52,8 @@ contract ClashOfTrolls is usingOraclize, mortal {
 
     //The method trolls need to call in order to claim the reward.
     //We give 10% of the current pool as the reward. This ensures that for a long time people will be able to claim rewards
-    function claimReward(string troll_post_id, string proof_comment_id) returns (string post_url) {
-        post_url = strConcat("json(http://www.reddit.com/by_id/t3_", troll_post_id, ".json).data.children.0.data.score");
+    function claimReward(string troll_post_id, string proof_comment_id) returns (bool result) {
+        string memory post_url = strConcat("json(http://www.reddit.com/by_id/t3_", troll_post_id, ".json).data.children.0.data.score");
         bytes32 post_cb_id = oraclize_query("URL", post_url);
         post_cb_index[post_cb_id] = troll_post_id;
         trolls[troll_post_id] = Troll({
@@ -61,5 +62,7 @@ contract ClashOfTrolls is usingOraclize, mortal {
             proof_comment_id: proof_comment_id,
             reward: 0
         });
+        
+        return true;
     }
 }
