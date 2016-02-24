@@ -1,28 +1,36 @@
 import "dev.oraclize.it/api.sol";
 import "std";
 
-contract Tugboat is usingOraclize, mortal {
-    address cot;
+contract interface is owned {
+    address implementation;
+    function interface(address addr) {
+        implementation = addr;
+    }
     
+    function updateContract(address addr) onlyowner {
+        implementation = addr;
+    }
+    
+    modifier ifImplemented { 
+        if(implementation == 0x0) {
+            msg.sender.send(msg.value);
+            return;
+        }
+        _ 
+    }
+}
+
+contract Tugboat is usingOraclize, mortal, interface {
     function Tugboat() {
-        cot = new ClashOfTrolls();
+        interface(new ClashOfTrolls());
     }
     
-    function updateContract(address addr) {
-        cot = addr;
-    }
-    
-    function depositFunds() returns (bool result) {
+    function depositFunds() ifImplemented returns (bool result) {
         if(msg.value == 0) {
             return false;
         }
         
-        if(cot == 0x0) {
-            msg.sender.send(msg.value);
-            return false;
-        }
-        
-        result = ClashOfTrolls(cot).depositFunds.value(msg.value)();
+        result = ClashOfTrolls(implementation).depositFunds.value(msg.value)();
         
         if(!result) {
             msg.sender.send(msg.value);
@@ -31,7 +39,7 @@ contract Tugboat is usingOraclize, mortal {
         return result;
     }
     
-    function claimReward(string troll_attempt, string proof) returns (bool result) {
-        result = ClashOfTrolls(cot).claimReward(troll_attempt, proof);
+    function claimReward(string troll_attempt, string proof) ifImplemented returns (bool result) {
+        result = ClashOfTrolls(implementation).claimReward(troll_attempt, proof);
     }
 }      
