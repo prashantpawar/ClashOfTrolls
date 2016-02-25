@@ -1,0 +1,29 @@
+{
+  "name": "clash-of-trolls",
+  "version": "1.0.0",
+  "description": "A Smart Contract which allows people to pay others to troll.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prashantpawar/ClashOfTrolls.git"
+  },
+  "keywords": [
+    "ethereum",
+    "solidity",
+    "reddit",
+    "troll",
+    "gameoftrolls"
+  ],
+  "author": "Prashant Singh Pawar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prashantpawar/ClashOfTrolls/issues"
+  },
+  "homepage": "https://github.com/prashantpawar/ClashOfTrolls#readme",
+  "devDependencies": {
+    "sol-unit": "^0.5.5"
+  }
+}
