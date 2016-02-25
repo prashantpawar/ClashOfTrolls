@@ -1,26 +1,9 @@
 import "dev.oraclize.it/api.sol";
 import "std";
+import "helper.sol";
+import "ClashOfTrolls.sol";
 
-contract interface is owned {
-    address implementation;
-    function interface(address addr) {
-        implementation = addr;
-    }
-    
-    function updateContract(address addr) onlyowner {
-        implementation = addr;
-    }
-    
-    modifier ifImplemented { 
-        if(implementation == 0x0) {
-            msg.sender.send(msg.value);
-            return;
-        }
-        _ 
-    }
-}
-
-contract Tugboat is usingOraclize, mortal, interface {
+contract Tugboat is usingOraclize, mortal, interface, refundable {
     function Tugboat() {
         interface(new ClashOfTrolls());
     }
@@ -33,7 +16,7 @@ contract Tugboat is usingOraclize, mortal, interface {
         result = ClashOfTrolls(implementation).depositFunds.value(msg.value)();
         
         if(!result) {
-            msg.sender.send(msg.value);
+            refund();
         }
         
         return result;
@@ -42,4 +25,4 @@ contract Tugboat is usingOraclize, mortal, interface {
     function claimReward(string troll_attempt, string proof) ifImplemented returns (bool result) {
         result = ClashOfTrolls(implementation).claimReward(troll_attempt, proof);
     }
-}      
+}
