@@ -10,6 +10,8 @@ contract interface is owned {
         implementation = addr;
     }
     
+    //This modifier aims to prevent an unimplemented function of an 'interface'
+    //from being executed
     modifier ifImplemented { 
         if(implementation == 0x0) {
             msg.sender.send(msg.value);
