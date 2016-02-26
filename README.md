@@ -34,8 +34,11 @@ To deal with race conditions, we give a certain random key to be posted from the
 
 Another problem is that the key cannot be easily randomized and might be predictable. One solution to that is to allow user to enter a key which he or she will use to demo the ownership of the account. But that brings us to the limitations that anybody can analyze the key and figure out the Troll.
 
-Implementation 3: To deal with the problem of non-trolls claiming the prize money, we can make the rules such a way that the troll must register himself to the DAPP before he or she makes the troll attempt. The token would be valid for 6 months. After that the prize cannot be claimed and is returned to the funders.
+**Status:** Planning
 
-Right now, hiding in plain sight is still a problem. If we store the username under which the troll attempt will be made then anyone will be able to find out the trolls before the troll attempts happen. Similarly if we don't store any identifiable information, then anyone (specifically non-trolls) will be able to claim the rewards. So how can we create an open authentication system for whistleblowers.
+##Version 3
+To deal with the problem of non-trolls claiming the prize money, we can make the rules such a way that the troll must register himself to the DAPP before he or she makes the troll attempt. The token would be valid for 6 months. After that the prize cannot be claimed and is returned to the funders.
+
+Right now, hiding in plain sight is still a problem. If we store the username under which the troll attempt will be made then anyone will be able to find out the trolls before the troll attempts happen. Similarly if we don't store any identifiable information, then anyone (specifically non-trolls) will be able to claim the rewards. This is the problem we need to solve (maybe Commit and Reveal).
 
 **Status:** Planning
