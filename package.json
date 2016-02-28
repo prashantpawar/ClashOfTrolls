@@ -4,7 +4,7 @@
   "description": "A Smart Contract which allows people to pay others to troll.",
   "main": "index.js",
   "scripts": {
-    "test": "solunit --help && exit 1"
+    "test": "solunit --dir=tests && exit 1"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/prashantpawar/ClashOfTrolls#readme",
   "devDependencies": {
-    "sol-unit": "^0.5.5"
+    "sol-unit": "^0.5.5",
+    "solc": "^0.1.6"
   }
 }
