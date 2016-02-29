@@ -4,7 +4,7 @@
   "description": "A Smart Contract which allows people to pay others to troll.",
   "main": "index.js",
   "scripts": {
-    "test": "solunit --dir=tests && exit 1"
+    "test": "solunit --dir=_binaries && exit 1"
   },
   "repository": {
     "type": "git",
