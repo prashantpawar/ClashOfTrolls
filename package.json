@@ -4,7 +4,9 @@
   "description": "A Smart Contract which allows people to pay others to troll.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "mkdir _binaries",
+    "compile": "solc contracts=contracts dev.oraclize.it=contracts/dev.oraclize.it tests/ClashOfTrollsTest.sol --bin --abi -o _binaries --add-std",
+    "test": "npm run compile && solunit --dir=_binaries"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
   },
   "homepage": "https://github.com/prashantpawar/ClashOfTrolls#readme",
   "devDependencies": {
-    "sol-unit": "^0.5.5"
+    "sol-unit": "^0.5.5",
+    "solc": "^0.1.6"
   }
 }
