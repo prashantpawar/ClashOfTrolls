@@ -3,7 +3,7 @@ import "std";
 
 contract ClashOfTrolls is usingOraclize, mortal {
     //Place where we store the total funds available for reward
-    uint totalFunds;
+    uint public totalFunds;
 
     struct Troll {
         address addr; //We want to know who the troll is
