@@ -5,6 +5,6 @@ contract ClashOfTrollsTest {
 
     function testDepositFunds() {
         ClashOfTrolls c = new ClashOfTrolls();
-        c.depositFunds.value(FUNDS)();
+        //c.depositFunds.value(FUNDS)();
     }
 }
