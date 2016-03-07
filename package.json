@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "mkdir _binaries",
     "compile": "solc Test.sol=node_modules/sol-unit/contracts/src/Test.sol Assertions.sol=node_modules/sol-unit/contracts/src/Assertions.sol contracts=contracts dev.oraclize.it=contracts/dev.oraclize.it tests/ClashOfTrollsTest.sol --bin --abi -o _binaries --add-std",
-    "test": "npm run compile && solunit --dir=_binaries"
+    "test": "npm run compile && solunit --debugMessages --dir=_binaries"
   },
   "repository": {
     "type": "git",
