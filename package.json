@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/prashantpawar/ClashOfTrolls#readme",
   "devDependencies": {
-    "sol-unit": "^0.5.5",
+    "sol-unit": "^0.6.0",
     "solc": "^0.1.6"
   }
 }
