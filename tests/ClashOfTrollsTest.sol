@@ -6,7 +6,7 @@ contract ClashOfTrollsTest is Test {
 
     function testDepositFunds() {
         ClashOfTrolls c = new ClashOfTrolls();
-        ClashOfTrolls(c).depositFunds.value(12320)();
-        ClashOfTrolls(c).totalFunds().assertEqual(0, "Funds weren't accepted");
+        c.depositFunds.gas(500).value(123414)();
+        c.totalFunds().assertEqual(0, "Funds weren't accepted");
     }
 }
