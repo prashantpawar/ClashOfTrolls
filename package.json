@@ -1,32 +1,29 @@
 {
-  "name": "clash-of-trolls",
-  "version": "1.0.0",
-  "description": "A Smart Contract which allows people to pay others to troll.",
-  "main": "index.js",
+  "name": "ClashOfTrolls",
+  "version": "0.0.1",
+  "description": "",
+  "main": "Gruntfile.js",
   "scripts": {
-    "postinstall": "mkdir _binaries",
-    "compile": "solc Test.sol=node_modules/sol-unit/contracts/src/Test.sol Assertions.sol=node_modules/sol-unit/contracts/src/Assertions.sol contracts=contracts dev.oraclize.it=contracts/dev.oraclize.it tests/ClashOfTrollsTest.sol --bin --abi -o _binaries --add-std",
-    "test": "npm run compile && solunit --debugMessages --dir=_binaries"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prashantpawar/ClashOfTrolls.git"
-  },
-  "keywords": [
-    "ethereum",
-    "solidity",
-    "reddit",
-    "troll",
-    "gameoftrolls"
-  ],
-  "author": "Prashant Singh Pawar",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/prashantpawar/ClashOfTrolls/issues"
-  },
-  "homepage": "https://github.com/prashantpawar/ClashOfTrolls#readme",
+  "author": "",
+  "license": "ISC",
+  "homepage": "",
   "devDependencies": {
-    "sol-unit": "^0.5.5",
-    "solc": "^0.1.6"
+    "embark-framework": "^1.0.2",
+    "grunt-embark": "^0.5.1",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-coffee": "^0.13.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "matchdep": "^0.3.0",
+    "mocha": "^2.2.5",
+    "express": "^4.12.3",
+    "read-yaml": "^1.0.0",
+    "compression": "^1.4.3"
   }
 }

@@ -1,6 +1,8 @@
 import "contracts/ClashOfTrolls.sol";
 import "Test.sol";
 
+
+
 contract ClashOfTrollsTest is Test {
     uint FUNDS = 1010134;
 
