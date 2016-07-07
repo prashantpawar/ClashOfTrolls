@@ -1,8 +1,6 @@
 development:
-  SimpleStorage:
+  ClashOfTrolls:
     args:
-      - 100
 staging:
-  SimpleStorage:
+  ClashOfTrolls:
     args:
-      - 100
